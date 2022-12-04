@@ -3,28 +3,21 @@ package subway.api.section;
 import subway.api.common.InputView;
 import subway.api.common.Menu;
 import subway.api.common.OutputView;
+import subway.api.common.View;
 
-public class SectionView {
-    private static final SectionController sectionController = new SectionController();
-    private static boolean showing = true;
+public class SectionView extends View {
+    private static final SectionView INSTANCE = new SectionView();
+    private final SectionController sectionController;
 
-    private static void startShowing() {
-        showing = true;
+    private SectionView() {
+        this.sectionController = new SectionController();
     }
 
-    protected static void quit() {
-        showing = false;
+    public static SectionView getInstance() {
+        return INSTANCE;
     }
 
-    public static void run() {
-        startShowing();
-
-        while (showing) {
-            show();
-        }
-    }
-
-    private static void show() {
+    protected void show() {
         try {
             showMenus();
             String select = inputSelect();
@@ -36,13 +29,13 @@ public class SectionView {
         }
     }
 
-    private static void showMenus() {
+    private void showMenus() {
         System.out.println("## 구간 관리 화면");
         System.out.println(Menu.listUp(SectionMenu.values()));
         OutputView.emptyLine();
     }
 
-    private static String inputSelect() {
+    private String inputSelect() {
         System.out.println("## 원하는 기능을 선택하세요.");
         return InputView.input();
     }
@@ -50,7 +43,7 @@ public class SectionView {
     /**
      * 구간 등록 API
      */
-    protected static void registerSection() {
+    protected void registerSection() {
         String lineName = inputLineNameForRegister();
         String stationName = inputStationNameForRegister();
         Integer order = inputOrder();
@@ -58,23 +51,23 @@ public class SectionView {
         printSuccessRegisterSection();
     }
 
-    private static String inputLineNameForRegister() {
+    private String inputLineNameForRegister() {
         System.out.println("## 노선을 입력하세요.");
         return InputView.input();
     }
 
-    private static String inputStationNameForRegister() {
+    private String inputStationNameForRegister() {
         System.out.println("## 역이름을 입력하세요.");
         return InputView.input();
     }
 
-    private static Integer inputOrder() {
+    private Integer inputOrder() {
         System.out.println("## 순서를 입력하세요.");
         String input = InputView.input();
         return Integer.parseInt(input);
     }
 
-    private static void printSuccessRegisterSection() {
+    private void printSuccessRegisterSection() {
         OutputView.info("구간이 등록되었습니다.");
         OutputView.emptyLine();
     }
@@ -82,24 +75,24 @@ public class SectionView {
     /**
      * 구간 삭제 API
      */
-    protected static void deleteSection() {
+    protected void deleteSection() {
         String lineName = inputLineNameForDelete();
         String stationName = inputStationNameForDelete();
         sectionController.deleteSection(lineName, stationName);
         printSuccessDeleteSection();
     }
 
-    private static String inputLineNameForDelete() {
+    private String inputLineNameForDelete() {
         System.out.println("## 삭제할 구간의 노선을 입력하세요.");
         return InputView.input();
     }
 
-    private static String inputStationNameForDelete() {
+    private String inputStationNameForDelete() {
         System.out.println("## 삭제할 구간의 역을 입력하세요.");
         return InputView.input();
     }
 
-    private static void printSuccessDeleteSection() {
+    private void printSuccessDeleteSection() {
         OutputView.info("구간이 삭제되었습니다.");
         OutputView.emptyLine();
     }

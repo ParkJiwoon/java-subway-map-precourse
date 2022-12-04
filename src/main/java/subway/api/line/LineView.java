@@ -3,31 +3,23 @@ package subway.api.line;
 import subway.api.common.InputView;
 import subway.api.common.Menu;
 import subway.api.common.OutputView;
+import subway.api.common.View;
 
 import java.util.List;
 
-public class LineView {
+public class LineView extends View {
+    private static final LineView INSTANCE = new LineView();
+    private final LineController lineController;
 
-    private static final LineController lineController = new LineController();
-    private static boolean showing = true;
-
-    private static void startShowing() {
-        showing = true;
+    private LineView() {
+        this.lineController = new LineController();
     }
 
-    protected static void quit() {
-        showing = false;
+    public static LineView getInstance() {
+        return INSTANCE;
     }
 
-    public static void run() {
-        startShowing();
-
-        while (showing) {
-            show();
-        }
-    }
-
-    private static void show() {
+    protected void show() {
         try {
             showMenus();
             String select = inputSelect();
@@ -39,13 +31,13 @@ public class LineView {
         }
     }
 
-    private static void showMenus() {
+    private void showMenus() {
         System.out.println("## 노선 관리 화면");
         System.out.println(Menu.listUp(LineMenu.values()));
         OutputView.emptyLine();
     }
 
-    private static String inputSelect() {
+    private String inputSelect() {
         System.out.println("## 원하는 기능을 선택하세요.");
         return InputView.input();
     }
@@ -53,7 +45,7 @@ public class LineView {
     /**
      * 노선 등록 API
      */
-    protected static void registerLine() {
+    protected void registerLine() {
         String lineName = inputLineNameForRegister();
         String firstStationName = inputFirstStationForLine();
         String lastStationName = inputLastStationForLine();
@@ -61,22 +53,22 @@ public class LineView {
         printSuccessAddLine();
     }
 
-    private static String inputLineNameForRegister() {
+    private String inputLineNameForRegister() {
         System.out.println("## 등록할 노선 이름을 입력하세요.");
         return InputView.input();
     }
 
-    private static String inputFirstStationForLine() {
+    private String inputFirstStationForLine() {
         System.out.println("## 등록할 노선의 상행 종점역 이름을 입력하세요.");
         return InputView.input();
     }
 
-    private static String inputLastStationForLine() {
+    private String inputLastStationForLine() {
         System.out.println("## 등록할 노선의 하행 종점역 이름을 입력하세요.");
         return InputView.input();
     }
 
-    private static void printSuccessAddLine() {
+    private void printSuccessAddLine() {
         OutputView.info("지하철 노선이 등록되었습니다.");
         OutputView.emptyLine();
     }
@@ -84,18 +76,18 @@ public class LineView {
     /**
      * 노선 삭제 API
      */
-    protected static void deleteLine() {
+    protected void deleteLine() {
         String lineName = inputLineNameForDelete();
         lineController.deleteLine(lineName);
         printSuccessDeleteLine();
     }
 
-    private static String inputLineNameForDelete() {
+    private String inputLineNameForDelete() {
         System.out.println("## 삭제할 노선 이름을 입력하세요.");
         return InputView.input();
     }
 
-    private static void printSuccessDeleteLine() {
+    private void printSuccessDeleteLine() {
         OutputView.info("지하철 노선이 삭제되었습니다.");
         OutputView.emptyLine();
     }
@@ -103,12 +95,12 @@ public class LineView {
     /**
      * 노선 조회 API
      */
-    protected static void findAllLines() {
+    protected void findAllLines() {
         List<String> lineNames = lineController.findAllLineNames();
         printAllLines(lineNames);
     }
 
-    private static void printAllLines(List<String> linesNames) {
+    private void printAllLines(List<String> linesNames) {
         System.out.println("## 노선 목록");
         linesNames.forEach(OutputView::info);
         OutputView.emptyLine();

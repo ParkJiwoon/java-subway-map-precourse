@@ -3,30 +3,23 @@ package subway.api.station;
 import subway.api.common.InputView;
 import subway.api.common.Menu;
 import subway.api.common.OutputView;
+import subway.api.common.View;
 
 import java.util.List;
 
-public class StationView {
-    private static final StationController stationController = new StationController();
-    private static boolean showing = true;
+public class StationView extends View {
+    private static final StationView INSTANCE = new StationView();
+    private final StationController stationController;
 
-    private static void startShowing() {
-        showing = true;
+    private StationView() {
+        this.stationController = new StationController();
     }
 
-    protected static void quit() {
-        showing = false;
+    public static StationView getInstance() {
+        return INSTANCE;
     }
 
-    public static void run() {
-        startShowing();
-
-        while (showing) {
-            show();
-        }
-    }
-
-    private static void show() {
+    protected void show() {
         try {
             showMenus();
             String select = inputSelect();
@@ -38,13 +31,13 @@ public class StationView {
         }
     }
 
-    private static void showMenus() {
+    private void showMenus() {
         System.out.println("## 역 관리 화면");
         System.out.println(Menu.listUp(StationMenu.values()));
         OutputView.emptyLine();
     }
 
-    private static String inputSelect() {
+    private String inputSelect() {
         System.out.println("## 원하는 기능을 선택하세요.");
         return InputView.input();
     }
@@ -52,18 +45,18 @@ public class StationView {
     /**
      * 역 등록 API
      */
-    protected static void registerStation() {
+    protected void registerStation() {
         String stationName = inputStationNameForRegister();
         stationController.addStation(stationName);
         printSuccessAddStation();
     }
 
-    private static String inputStationNameForRegister() {
+    private String inputStationNameForRegister() {
         System.out.println("## 등록할 역 이름을 입력하세요.");
         return InputView.input();
     }
 
-    private static void printSuccessAddStation() {
+    private void printSuccessAddStation() {
         OutputView.info("지하철 역이 등록되었습니다.");
         OutputView.emptyLine();
     }
@@ -71,18 +64,18 @@ public class StationView {
     /**
      * 역 삭제 API
      */
-    protected static void deleteStation() {
+    protected void deleteStation() {
         String stationName = inputStationNameForDelete();
         stationController.deleteStation(stationName);
         printSuccessDeleteStation();
     }
 
-    private static String inputStationNameForDelete() {
+    private String inputStationNameForDelete() {
         System.out.println("## 삭제할 역 이름을 입력하세요.");
         return InputView.input();
     }
 
-    private static void printSuccessDeleteStation() {
+    private void printSuccessDeleteStation() {
         OutputView.info("지하철 역이 삭제되었습니다.");
         OutputView.emptyLine();
     }
@@ -90,12 +83,12 @@ public class StationView {
     /**
      * 모든 역 찾기 API
      */
-    protected static void findAllStations() {
+    protected void findAllStations() {
         List<String> stationNames = stationController.findAllStationNames();
         printAllStations(stationNames);
     }
 
-    private static void printAllStations(List<String> stationNames) {
+    private void printAllStations(List<String> stationNames) {
         System.out.println("## 역 목록");
         stationNames.forEach(OutputView::info);
         OutputView.emptyLine();

@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 public class Application {
     public static void main(String[] args) {
         initData();
-        MainView.run();
+        MainView.getInstance().run();
     }
 
     private static void initData() {

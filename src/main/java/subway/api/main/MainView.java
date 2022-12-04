@@ -3,31 +3,24 @@ package subway.api.main;
 import subway.api.common.InputView;
 import subway.api.common.Menu;
 import subway.api.common.OutputView;
+import subway.api.common.View;
 
 import java.util.List;
 import java.util.Map;
 
-public class MainView {
-    private static final MainController mainController = new MainController();
-    private static boolean showing = true;
+public class MainView extends View {
+    private static final MainView INSTANCE = new MainView();
+    private final MainController mainController;
 
-    private static void startShowing() {
-        showing = true;
+    private MainView() {
+        this.mainController = new MainController();
     }
 
-    protected static void quit() {
-        showing = false;
+    public static MainView getInstance() {
+        return INSTANCE;
     }
 
-    public static void run() {
-        startShowing();
-
-        while (showing) {
-            show();
-        }
-    }
-
-    private static void show() {
+    protected void show() {
         try {
             showMenus();
             String select = inputSelect();
@@ -38,13 +31,13 @@ public class MainView {
         }
     }
 
-    private static void showMenus() {
+    private void showMenus() {
         System.out.println("## 메인 화면");
         System.out.println(Menu.listUp(MainMenu.values()));
         OutputView.emptyLine();
     }
 
-    private static String inputSelect() {
+    private String inputSelect() {
         System.out.println("## 원하는 기능을 선택하세요.");
         return InputView.input();
     }
@@ -52,7 +45,7 @@ public class MainView {
     /**
      * 지하철 노선도 출력
      */
-    protected static void showSubwayMap() {
+    public void showSubwayMap() {
         Map<String, List<String>> subwayMap = mainController.findSubwayMap();
         printSubwayMap(subwayMap);
     }

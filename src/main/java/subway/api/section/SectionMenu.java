@@ -3,9 +3,9 @@ package subway.api.section;
 import subway.api.common.Menu;
 
 public enum SectionMenu implements Menu {
-    REGISTER("1", "구간 등록", SectionView::registerSection),
-    DELETE("2", "구간 삭제", SectionView::deleteSection),
-    BACK("B", "돌아가기", SectionView::quit),
+    REGISTER("1", "구간 등록", () -> SectionView.getInstance().registerSection()),
+    DELETE("2", "구간 삭제", () -> SectionView.getInstance().deleteSection()),
+    BACK("B", "돌아가기", () -> SectionView.getInstance().quit()),
     ;
 
     private final String index;

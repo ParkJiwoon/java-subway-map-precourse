@@ -3,10 +3,10 @@ package subway.api.station;
 import subway.api.common.Menu;
 
 public enum StationMenu implements Menu {
-    REGISTER("1", "역 등록", StationView::registerStation),
-    DELETE("2", "역 삭제", StationView::deleteStation),
-    SHOW("3", "역 조회", StationView::findAllStations),
-    BACK("B", "돌아가기", StationView::quit),
+    REGISTER("1", "역 등록", () -> StationView.getInstance().registerStation()),
+    DELETE("2", "역 삭제", () -> StationView.getInstance().deleteStation()),
+    SHOW("3", "역 조회", () -> StationView.getInstance().findAllStations()),
+    BACK("B", "돌아가기", () -> StationView.getInstance().quit()),
     ;
 
     private final String index;
