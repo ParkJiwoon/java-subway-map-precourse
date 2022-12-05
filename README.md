@@ -3,6 +3,51 @@
 
 <br>
 
+# Architecture
+
+![](images/screen_2022_12_06_04_53_33.png)
+
+<br>
+
+# Package 구조
+
+```java
+├── Application.java
+├── api
+│   ├── common
+│   │   ├── InputView.java
+│   │   ├── Menu.java
+│   │   ├── OutputView.java
+│   │   └── View.java
+│   ├── line
+│   │   ├── LineController.java
+│   │   ├── LineMenu.java
+│   │   └── LineView.java
+│   ├── main
+│   │   ├── MainController.java
+│   │   ├── MainMenu.java
+│   │   └── MainView.java
+│   ├── section
+│   │   ├── SectionController.java
+│   │   ├── SectionMenu.java
+│   │   └── SectionView.java
+│   └── station
+│       ├── StationController.java
+│       ├── StationMenu.java
+│       └── StationView.java
+└── domain
+    ├── line
+    │   ├── Line.java
+    │   └── LineRepository.java
+    └── station
+        ├── Station.java
+        └── StationRepository.java
+```
+
+
+
+<br>
+
 ## 🚀 기능 요구사항
 
 ### 초기 설정 
