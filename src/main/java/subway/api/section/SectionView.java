@@ -37,7 +37,7 @@ public class SectionView extends View {
 
     private String inputSelect() {
         System.out.println("## 원하는 기능을 선택하세요.");
-        return InputView.input();
+        return InputView.string();
     }
 
     /**
@@ -53,17 +53,17 @@ public class SectionView extends View {
 
     private String inputLineNameForRegister() {
         System.out.println("## 노선을 입력하세요.");
-        return InputView.input();
+        return InputView.string();
     }
 
     private String inputStationNameForRegister() {
         System.out.println("## 역이름을 입력하세요.");
-        return InputView.input();
+        return InputView.string();
     }
 
     private Integer inputOrder() {
         System.out.println("## 순서를 입력하세요.");
-        String input = InputView.input();
+        String input = InputView.string();
         return Integer.parseInt(input);
     }
 
@@ -84,12 +84,12 @@ public class SectionView extends View {
 
     private String inputLineNameForDelete() {
         System.out.println("## 삭제할 구간의 노선을 입력하세요.");
-        return InputView.input();
+        return InputView.string();
     }
 
     private String inputStationNameForDelete() {
         System.out.println("## 삭제할 구간의 역을 입력하세요.");
-        return InputView.input();
+        return InputView.string();
     }
 
     private void printSuccessDeleteSection() {

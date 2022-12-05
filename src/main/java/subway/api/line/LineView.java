@@ -39,7 +39,7 @@ public class LineView extends View {
 
     private String inputSelect() {
         System.out.println("## 원하는 기능을 선택하세요.");
-        return InputView.input();
+        return InputView.string();
     }
 
     /**
@@ -55,17 +55,17 @@ public class LineView extends View {
 
     private String inputLineNameForRegister() {
         System.out.println("## 등록할 노선 이름을 입력하세요.");
-        return InputView.input();
+        return InputView.string();
     }
 
     private String inputFirstStationForLine() {
         System.out.println("## 등록할 노선의 상행 종점역 이름을 입력하세요.");
-        return InputView.input();
+        return InputView.string();
     }
 
     private String inputLastStationForLine() {
         System.out.println("## 등록할 노선의 하행 종점역 이름을 입력하세요.");
-        return InputView.input();
+        return InputView.string();
     }
 
     private void printSuccessAddLine() {
@@ -84,7 +84,7 @@ public class LineView extends View {
 
     private String inputLineNameForDelete() {
         System.out.println("## 삭제할 노선 이름을 입력하세요.");
-        return InputView.input();
+        return InputView.string();
     }
 
     private void printSuccessDeleteLine() {

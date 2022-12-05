@@ -39,7 +39,7 @@ public class MainView extends View {
 
     private String inputSelect() {
         System.out.println("## 원하는 기능을 선택하세요.");
-        return InputView.input();
+        return InputView.string();
     }
 
     /**
