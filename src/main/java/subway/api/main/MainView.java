@@ -20,21 +20,17 @@ public class MainView extends View {
         return INSTANCE;
     }
 
-    protected void show() {
-        try {
-            showMenus();
-            String select = inputSelect();
-            Menu menu = Menu.of(MainMenu.values(), select);
-            menu.run();
-        } catch (IllegalArgumentException e) {
-            OutputView.error(e.getMessage());
-        }
-    }
-
-    private void showMenus() {
+    @Override
+    protected void showMenus() {
         System.out.println("## 메인 화면");
         System.out.println(Menu.listUp(MainMenu.values()));
         OutputView.emptyLine();
+    }
+
+    @Override
+    protected void runSelectMenu(String select) {
+        Menu menu = Menu.of(MainMenu.values(), select);
+        menu.run();
     }
 
     /**

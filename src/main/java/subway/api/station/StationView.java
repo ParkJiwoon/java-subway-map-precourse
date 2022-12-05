@@ -19,22 +19,18 @@ public class StationView extends View {
         return INSTANCE;
     }
 
-    protected void show() {
-        try {
-            showMenus();
-            String select = inputSelect();
-            Menu menu = Menu.of(StationMenu.values(), select);
-            menu.run();
-            quit();
-        } catch (IllegalArgumentException e) {
-            OutputView.error(e.getMessage());
-        }
-    }
-
-    private void showMenus() {
+    @Override
+    protected void showMenus() {
         System.out.println("## 역 관리 화면");
         System.out.println(Menu.listUp(StationMenu.values()));
         OutputView.emptyLine();
+    }
+
+    @Override
+    protected void runSelectMenu(String select) {
+        Menu menu = Menu.of(StationMenu.values(), select);
+        menu.run();
+        quit();
     }
 
     /**
