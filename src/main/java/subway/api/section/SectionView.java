@@ -35,11 +35,6 @@ public class SectionView extends View {
         OutputView.emptyLine();
     }
 
-    private String inputSelect() {
-        System.out.println("## 원하는 기능을 선택하세요.");
-        return InputView.string();
-    }
-
     /**
      * 구간 등록 API
      */
