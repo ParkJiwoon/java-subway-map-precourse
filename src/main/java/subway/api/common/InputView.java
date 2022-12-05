@@ -10,4 +10,10 @@ public class InputView {
         OutputView.emptyLine();
         return input;
     }
+
+    public static int integer() {
+        String input = scanner.nextLine();
+        OutputView.emptyLine();
+        return Integer.parseInt(input);
+    }
 }

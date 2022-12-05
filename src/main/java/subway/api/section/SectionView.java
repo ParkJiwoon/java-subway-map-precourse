@@ -63,8 +63,7 @@ public class SectionView extends View {
 
     private Integer inputOrder() {
         System.out.println("## 순서를 입력하세요.");
-        String input = InputView.string();
-        return Integer.parseInt(input);
+        return InputView.integer();
     }
 
     private void printSuccessRegisterSection() {
