@@ -1,6 +1,5 @@
 package subway.api.main;
 
-import subway.api.common.InputView;
 import subway.api.common.Menu;
 import subway.api.common.OutputView;
 import subway.api.common.View;

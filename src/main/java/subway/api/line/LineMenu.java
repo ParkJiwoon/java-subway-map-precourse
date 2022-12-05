@@ -20,18 +20,13 @@ public enum LineMenu implements Menu {
     }
 
     @Override
-    public String getIndex() {
-        return index;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
     public void run() {
         runnable.run();
+    }
+
+    @Override
+    public boolean equalIndex(String select) {
+        return index.equals(select);
     }
 
     @Override
